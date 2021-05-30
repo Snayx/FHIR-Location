@@ -1,0 +1,40 @@
+<div class="login-page">
+    <app-background></app-background>
+    <div class="centering">
+        <mat-card class="container">
+            <mat-card-header class="header centering">
+                <mat-card-title class="title centering">Regisztráció</mat-card-title>
+            </mat-card-header>
+            <mat-error class="centering error">
+                {{ authError?.message }}
+            </mat-error>
+            <mat-card-content>
+                <form class="register-form" [formGroup]="form"
+                    (ngSubmit)="onSignUp()">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" name="email"
+                            placeholder="Email cím" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field class="full-width vertical-spacing">
+                        <input matInput type="password" name="password"
+                            placeholder="Jelszó" formControlName="password">
+                    </mat-form-field>
+                    <button mat-flat-button type="submit"
+                        class="full-width button vertical-spacing"
+                        [disabled]="form.invalid || form.pending">
+                        Regisztrálás
+                    </button>
+                </form>
+                <div class="sub-login vertical-spacing">
+                    <div class="centering">
+                        <button mat-button class="create-account centering"
+                            [routerLink]="['/login']"
+                            routerLinkActive="router-link-active">Vissza</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <app-footer></app-footer>
+</div>

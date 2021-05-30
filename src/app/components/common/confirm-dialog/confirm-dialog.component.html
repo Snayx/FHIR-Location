@@ -1,0 +1,5 @@
+<h1 mat-dialog-title class="centering">{{data.title}}</h1>
+<mat-dialog-actions class="centering">
+    <button class="confirm-button" mat-button (click)="onNoClick()">Nem</button>
+    <button class="confirm-button" mat-button [mat-dialog-close]="true" cdkFocusInitial>Igen</button>
+</mat-dialog-actions>

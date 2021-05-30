@@ -1,0 +1,161 @@
+<mat-expansion-panel class="container">
+    <mat-expansion-panel-header *ngIf="!isMobile" fxLayout="row wrap">
+        <mat-panel-title fxFlex="70%">
+            {{locationItem.name}}
+        </mat-panel-title>
+        <mat-panel-description fxFlex="30%">
+            {{locationItem.address.city}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="isMobile" [collapsedHeight]="'8vh'"
+        fxLayout="row wrap">
+        <mat-panel-title fxFlex="70%">
+            {{locationItem.name}}
+        </mat-panel-title>
+        <mat-panel-description fxFlex="30%">
+            {{locationItem.address.city}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="item-details" fxLayout="row wrap">
+        <div class="details" *ngIf="locationItem.status" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Státusz:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.status}}</p>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="details" *ngIf="locationItem.operationalStatus"
+            fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Müködési Státusz:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.operationalStatus}}</p>
+            </div>
+        </div>
+        <div class="details" *ngIf="locationItem.name" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Helyiség Neve:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.name}}</p>
+            </div>
+        </div>
+        <div class="details" *ngIf="locationItem.description" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Leírás:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.description}}</p>
+            </div>
+        </div>
+        <div class="details" *ngIf="locationItem.type" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Hely fajtája:</label>
+            </div>
+            <div fxLayout="column" fxFlex="75%" fxFlex.xs="50%">
+                <div class="item-spacing" *ngFor="let item of
+                    locationItem.type">
+                    <p>{{item | replace : '[_]' : ' '}} </p>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="details" *ngIf="locationItem.telekom" fxFlex="100%">
+            <div *ngIf="locationItem.telekom.contactValue" fxFlex="25%"
+                fxFlex.xs="50%">
+                <label>Elérhetőség:</label>
+            </div>
+            <div fxLayout="column" fxFlex="75%" fxFlex.xs=100%>
+                <div class="item-spacing"
+                    *ngIf="locationItem.telekom.contactSystem" fxFlex="100%">
+                    <p>{{locationItem.telekom.contactSystem}}</p>
+                </div>
+                <div class="item-spacing"
+                    *ngIf="locationItem.telekom.contactValue" fxFlex="100%">
+                    <p>{{locationItem.telekom.contactValue}}</p>
+                </div>
+                <div *ngIf="locationItem.telekom.contactUse" fxFlex="100%">
+                    <p>{{locationItem.telekom.contactUse + " contact"}}</p>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="details" *ngIf="locationItem.address" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Cím:</label>
+            </div>
+            <div fxLayout="column" fxFlex="75%" fxFlex.xs=100%>
+                <div class="item-spacing" *ngIf="locationItem.address.use"
+                    fxFlex="100%">
+                    <p>{{locationItem.address.use + " address"}}</p>
+                </div>
+                <div class="item-spacing" *ngIf="locationItem.address.type"
+                    fxFlex="100%">
+                    <p>{{getAddressType(locationItem.address.type)}}</p>
+                </div>
+                <div fxFlex="100%">
+                    <p>{{locationItem.address.postalCode + " " +
+                        locationItem.address.city}}</p>
+                </div>
+                <div fxFlex="100%">
+                    <p>{{locationItem.address.line}}</p>
+                </div>
+                <div fxFlex="100%">
+                    <p>{{locationItem.address.country}}</p>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="details" *ngIf="locationItem.physicalType" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Fizikai Fajtája:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.physicalType}}</p>
+            </div>
+        </div>
+        <div class="details" *ngIf="locationItem.managingOrganization"
+            fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>Kezelő Organizáció:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.managingOrganization}}</p>
+            </div>
+        </div>
+        <div class="details" *ngIf="locationItem.partOf" fxFlex="100%">
+            <div fxFlex="25%" fxFlex.xs="50%">
+                <label>része:</label>
+            </div>
+            <div fxFlex="75%" fxFlex.xs="50%">
+                <p>{{locationItem.partOf}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="centering">
+        <button
+            mat-flat-button
+            class="nav-button"
+            (click)="openNav()">
+            Navigálás
+        </button>
+    </div>
+    <div class="centering top-spacing">
+        <button
+            mat-flat-button
+            class="delete-button"
+            (click)="delete()">
+            Törlés
+        </button>
+        <span class="spacer"></span>
+        <button
+            mat-flat-button
+            class="edit-button"
+            (click)="edit()">
+            Szerkesztés
+        </button>
+    </div>
+</mat-expansion-panel>

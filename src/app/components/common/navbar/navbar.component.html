@@ -1,0 +1,61 @@
+<mat-toolbar [ngClass]="isMobile ? 'bottom' : 'top'" class="navbar-container">
+    <mat-toolbar-row class="bottom-button-row centering" *ngIf="isOpen &&
+        isMobile && !isHome">
+        <button mat-button fxLayout="row" class="bottom-button"
+            (click)="home()">
+            Kezdőlap
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="bottom-button-row centering" *ngIf="isOpen &&
+        isMobile">
+        <button mat-button fxLayout="row" class="bottom-button"
+            (click)="addNew()">
+            Új hozzáadása
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="bottom-button-row centering" *ngIf="isOpen &&
+        isMobile">
+        <button mat-button fxLayout="row" class="bottom-button"
+            (click)="about()">
+            Információk
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="bottom-button-row centering" *ngIf="isOpen &&
+        isMobile">
+        <button mat-button fxLayout="row" class="bottom-button"
+            (click)="logOut()">
+            Kijelentkezés
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <div class="centering">
+            <fa-icon class="angular-icon horizontal-spacing"
+                [icon]="angularIcon"></fa-icon>
+            <h2 class="navbar-title">FHIR-Location | Korház Kereső</h2>
+        </div>
+        <span class="navbar-spacer"></span>
+        <button mat-button class="menu-button" *ngIf="isMobile"
+            (click)="openMenu()">
+            <fa-icon class="horizontal-spacing centering" [icon]="menuIcon"></fa-icon>
+        </button>
+        <div *ngIf="!isMobile">
+            <button mat-button class="top-button" *ngIf="!isHome"
+                (click)="home()">
+                <fa-icon [icon]="homeIcon"></fa-icon>
+                Kezdőlap
+            </button>
+            <button mat-button class="top-button" (click)="addNew()">
+                <fa-icon [icon]="addIcon"></fa-icon>
+                Új hozzáadás
+            </button>
+            <button mat-button class="top-button" (click)="about()">
+                <fa-icon [icon]="infoIcon"></fa-icon>
+                Információk
+            </button>
+            <button mat-button class="top-button" (click)="logOut()">
+                <fa-icon [icon]="signOutIcon"></fa-icon>
+                Kijelentkezés
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

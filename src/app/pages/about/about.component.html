@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<app-background *ngIf="isMobile"></app-background>
+<div class="about-container centering" [ngClass]="isMobile ? 'bottom' : 'top'">
+    <mat-card class="about">
+        <mat-card-header>
+            <mat-card-title>FHIR Location</mat-card-title>
+            <mat-card-subtitle>Angular 11 application</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="top-spacing">
+            <p>Renyák Dávid István</p>
+        </mat-card-content>
+    </mat-card>
+</div>

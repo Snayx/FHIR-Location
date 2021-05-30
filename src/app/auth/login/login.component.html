@@ -1,0 +1,43 @@
+<div class="login-page">
+    <app-background></app-background>
+    <div class="centering">
+        <mat-card class="container">
+            <mat-card-header class="header centering">
+                <fa-icon class="angular-icon" matCardAvatar
+                    [icon]="angularIcon"></fa-icon>
+                <mat-card-title class="title">Korház kereső</mat-card-title>
+                <mat-card-subtitle class="subtitle">Angular Firebase
+                    <span style="white-space: nowrap;">FHIR-Location</span></mat-card-subtitle>
+            </mat-card-header>
+            <mat-error class="centering error">
+                {{ authError }}
+            </mat-error>
+            <mat-card-content>
+                <form class="login-form" [formGroup]="form"
+                    (ngSubmit)="onSignIn()">
+                    <mat-form-field class="full-width">
+                        <input matInput type="email" name="email" placeholder="Email cím"
+                            formControlName="email">
+                        <mat-error *ngIf="form.get('email')?.invalid">{{getError()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width vertical-spacing">
+                        <input matInput type="password" name="password" placeholder="Jelszó"
+                            formControlName="password">
+                    </mat-form-field>
+                    <button mat-flat-button type="submit"
+                        class="full-width button vertical-spacing"
+                        [disabled]="form.invalid || form.pending">
+                        Bejelentkezés
+                    </button>
+                </form>
+                <div class="sub-login vertical-spacing">
+                    <div class="centering">
+                        <button mat-button class="create-account centering"
+                            routerLink="/register">Új fiók létrehozása</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <app-footer></app-footer>
+</div>

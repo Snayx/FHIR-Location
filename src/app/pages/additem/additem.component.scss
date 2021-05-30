@@ -1,0 +1,37 @@
+@use 'src/styles';
+
+.wrapper{
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background: styles.$body-color;
+}
+
+.radio-button{
+    width: 100%;
+    font-size: 0.75rem;
+} 
+
+.add-page{
+    height: 100%;
+    width: 100%;
+    background: styles.$body-color;
+
+    .container{
+        width: 90%;
+        max-height: 80%;
+        overflow: auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        
+        .add-button{
+            width: 40%;
+        }
+
+        .flex{
+            flex-grow: 1;
+        }
+    }
+}

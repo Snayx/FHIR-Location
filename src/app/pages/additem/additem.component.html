@@ -1,0 +1,204 @@
+<div class="add-page">
+	<app-background></app-background>
+	<div class="centering">
+		<mat-card class="container">
+			<mat-card-header class="header centering">
+				<fa-icon
+					class="angular-icon"
+					matCardAvatar
+					[icon]="angularIcon"></fa-icon>
+				<mat-card-title *ngIf="isUpdate" class="title">Helyiség Frissítés</mat-card-title>
+				<mat-card-title *ngIf="!isUpdate" class="title">Új hozzáadása</mat-card-title>
+			</mat-card-header>
+			<mat-card-header class="centering">
+				<mat-card-subtitle class="error centering"></mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content>
+				<form [formGroup]="addForm" class="add-form">
+					<div class="wrapper">
+						<h3>Hely státusza:</h3>
+						<mat-button-toggle-group class="full-width"
+							formControlName="status" aria-label="Hely Státusza">
+							<mat-button-toggle class="radio-button" *ngFor="let item of Status |
+								keyvalue"
+								[value]="item.value">{{[item.value]}}</mat-button-toggle>
+						</mat-button-toggle-group>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Müködési státusz:</mat-label>
+							<mat-select formControlName="operationalStatus">
+								<mat-option *ngFor="let item of getKeys(OperationalStatus)"
+									[value]="item">
+									{{item}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div class="wrapper">
+						<h3>Letesítmény:</h3>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Neve</mat-label>
+							<input matInput
+								type="text"
+								formControlName="name"
+								attr.aria-label="Name"
+								placeholder="Létesítmény neve"
+								required="true">
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Leírása</mat-label>
+							<input matInput
+								type="text"
+								formControlName="description"
+								attr.aria-label="Description"
+								placeholder="Létesítmény leírása">
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Létesítmény fajtája</mat-label>
+							<mat-select formControlName="type" multiple="true">
+								<mat-option>
+									<ngx-mat-select-search [formControl]="searchFilterControl"
+										placeholderLabel="Select facility type"
+										noEntriesFoundLabel="No matching value"></ngx-mat-select-search>
+								</mat-option>
+								<mat-option *ngFor="let item of filteredEnum | async" [value]="item">
+									{{item}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div class="wrapper">
+						<h3>Kontakt:</h3>
+						<div formGroupName="telekom">
+							<mat-form-field class="full-width top-spacing">
+								<mat-label>Kontakt fajtája</mat-label>
+								<mat-select formControlName="contactSystem">
+									<mat-option *ngFor="let item of getKeys(ContactSystem)" [value]="item">
+										{{item}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<mat-form-field class="full-width top-spacing">
+								<mat-label>Tényleges kapcsolatfelvétel</mat-label>
+								<input matInput
+									type="text"
+									formControlName="contactValue"
+									attr.aria-label="Actual contact"
+									placeholder="Kapcsolattartás(fax,email stb.)"
+									autocomplete="off">
+							</mat-form-field>
+							<mat-form-field class="full-width top-spacing">
+								<mat-label>Kapcsolattartás</mat-label>
+								<mat-select formControlName="contactUse">
+									<mat-option *ngFor="let item of getKeys(ContactUse)" [value]="item">
+										{{item}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="wrapper" formGroupName="address">
+						<h3>Cím:</h3>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Cím Használat</mat-label>
+							<mat-select formControlName="use">
+								<mat-option *ngFor="let item of getKeys(addressUse)" [value]="item">
+									{{item}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Cím Fajtája</mat-label>
+							<mat-select formControlName="type">
+								<mat-option *ngFor="let item of getKeys(addressType)" [value]="item">
+									{{item}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Cím</mat-label>
+							<textarea
+								matInput
+								formControlName="line"
+								placeholder="Pl. Minta street 54. 2.e"
+								required="true">
+							</textarea>
+						</mat-form-field>
+						<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start end">
+							<mat-form-field class="top-spacing" fxFlex="calc(75%-10px)"
+								fxFlex.xs="100%">
+								<mat-label>Város</mat-label>
+								<input
+									matInput
+									formControlName="city"
+									placeholder="Pl. Budapest"
+									required="true"
+									fxFlexFill/>
+							</mat-form-field>
+							<mat-form-field class="top-spacing" fxFlex="calc(100%-75%)"
+								fxFlex.xs="100%">
+								<mat-label>Irányítószám</mat-label>
+								<input
+									matInput
+									type="number"
+									formControlName="postalCode"
+									placeholder="Pl. 6710"
+									required="true"
+									fxFlexFill/>
+							</mat-form-field>
+						</div>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Ország</mat-label>
+							<input matInput formControlName="country" required="true" />
+						</mat-form-field>
+					</div>
+					<div class="wrapper">
+						<h3>Fizikai Fajta:</h3>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Fizikai Fajta</mat-label>
+							<mat-select formControlName="physicalType">
+								<mat-option *ngFor="let item of getKeys(PhysicalType)" [value]="item">
+									{{item}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Irányító Szervezet</mat-label>
+							<input
+								matInput
+								type="text"
+								formControlName="managingOrganization"
+								placeholder="Irányító Szervezet ami a helyet irányít" />
+						</mat-form-field>
+						<mat-form-field class="full-width top-spacing">
+							<mat-label>Része</mat-label>
+							<input
+								matInput
+								type="text"
+								formControlName="partOf"
+								placeholder="Az organizáció a része .." />
+						</mat-form-field>
+					</div>
+					<div class="centering">
+						<button
+							mat-flat-button
+							type="button"
+							class="add-button vertical-spacing"
+							routerLink="/home">
+							Mégsem
+						</button>
+						<span class="spacer"></span>
+						<button
+							mat-flat-button
+							type="button"
+							class="add-button vertical-spacing"
+							routerLink="/home"
+							[disabled]="addForm.invalid || addForm.pending"
+							(click)="submitForm()">
+							Küldés
+						</button>
+					</div>
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>

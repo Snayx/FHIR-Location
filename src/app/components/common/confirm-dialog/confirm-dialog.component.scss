@@ -1,0 +1,6 @@
+@use "src/styles";
+
+.confirm-button{
+    background: styles.$body-darken;
+    margin: 1rem;
+}

@@ -1,0 +1,42 @@
+@use 'src/styles';
+
+.footer-container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 5rem;
+    text-align: center;
+
+    .footer-contact{
+        background-color: styles.$top-footer-color;
+        height: 50%;
+
+        h3{
+            margin: 0 1rem 0;
+            color: styles.$text-light;
+        }
+
+        a{
+            height: 100%;
+        }
+
+        .footer-icon{
+            color: styles.$text-light;
+            padding: 1rem;
+            height: 100%;
+        }
+
+        .footer-icon:hover{
+            color: styles.$text-light-hover;
+            background-color: styles.$on-hover;
+        }
+    }
+
+    .footer-info{
+        background-color: styles.$bottom-footer-color;
+        color: styles.$text-light;
+        height: 50%;
+    }
+}
